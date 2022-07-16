@@ -1,43 +1,41 @@
 {
   "project_info": {
-    "project_number": "1066037249477",
-    "firebase_url": "https://flutter-todo-app-real.firebaseio.com",
-    "project_id": "flutter-todo-app-real",
-    "storage_bucket": "flutter-todo-app-real.appspot.com"
+    "project_number": "494568612584",
+    "project_id": "nxt-push",
+    "storage_bucket": "nxt-push.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1066037249477:android:48b1ad5380835b8407f7ac",
+        "mobilesdk_app_id": "1:494568612584:android:24db9236ad7b752c1e5f5d",
         "android_client_info": {
-          "package_name": "com.example.todo_app"
+          "package_name": "com.project.todo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1066037249477-ubb76cbedftntkpjp42uhb5a8o8lqltm.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.todo_app",
-            "certificate_hash": "f1a6dc46f90cf0858b62995c861d2f6b733144ae"
-          }
-        },
-        {
-          "client_id": "1066037249477-j2fa7ulbdrr07o6rr62f73qov2fliioj.apps.googleusercontent.com",
+          "client_id": "494568612584-hic1qas4bp579dcbn2ifl2g920q8rcoq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCl3YL660d32qqSl13mzz-A9WEv-TkvoAU"
+          "current_key": "AIzaSyCTKeKXI25jmjt3YsC42dOu1a25UvPgVFk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1066037249477-j2fa7ulbdrr07o6rr62f73qov2fliioj.apps.googleusercontent.com",
+              "client_id": "494568612584-hic1qas4bp579dcbn2ifl2g920q8rcoq.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "494568612584-qmnoukj6t6cspfsihih58ghoa04942m4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.project.todo"
+              }
             }
           ]
         }

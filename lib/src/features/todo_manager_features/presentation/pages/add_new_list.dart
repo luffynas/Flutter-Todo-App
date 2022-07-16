@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_app/src/features/todo_manager_features/presentation/bloc/add_list_bloc/add_list_bloc.dart'
@@ -10,7 +9,6 @@ import '../bloc/add_list_bloc/add_list_bloc.dart';
 import '../widgets/small_button.dart';
 
 class AddList extends StatefulWidget {
-  
   @override
   _AddListState createState() => _AddListState();
 }
@@ -25,12 +23,11 @@ class _AddListState extends State<AddList> {
 
   @override
   void dispose() {
-    
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    
     return BlocListener<AddListBloc, AddListState>(
       listener: (context, state) {
         if (state is AddingList) {
@@ -103,13 +100,12 @@ class _AddListState extends State<AddList> {
                         Expanded(
                           child: TextFormField(
                             controller: _titleController,
-                            validator: (val){
+                            validator: (val) {
                               if (val.isEmpty) {
                                 return 'Please enter some text';
                               }
                               return null;
                             },
-  
                             style: TextStyle(
                                 fontSize: 27.0,
                                 fontFamily: "Poppins",
@@ -127,14 +123,14 @@ class _AddListState extends State<AddList> {
                               color: Colors.white,
                             ),
                             onPressed: () async {
-                              if(_formKey.currentState.validate()){
-                                BlocProvider.of<AddListBloc>(context).add(event.AddList(
-                                  listBackgroundColor:
-                                      "#${_selectedColor.toString().substring(10, 16)}",
-                                  listOfTodos: _listOfTodos,
-                                  listTitle: _titleController.text));
+                              if (_formKey.currentState.validate()) {
+                                BlocProvider.of<AddListBloc>(context).add(
+                                    event.AddList(
+                                        listBackgroundColor:
+                                            "#${_selectedColor.toString().substring(10, 16)}",
+                                        listOfTodos: _listOfTodos,
+                                        listTitle: _titleController.text));
                               }
-                              
                             })
                       ],
                     ),
@@ -209,7 +205,11 @@ class _AddListState extends State<AddList> {
                                   ),
                                   SizedBox(width: 40.0),
                                   Container(
-                                    width: MediaQuery.of(context).size.width * 0.8 > 300 ? 300: MediaQuery.of(context).size.width,
+                                    width: MediaQuery.of(context).size.width *
+                                                0.8 >
+                                            300
+                                        ? 300
+                                        : MediaQuery.of(context).size.width,
                                     child: Text(
                                       todo.title,
                                       style: TextStyle(
@@ -234,7 +234,8 @@ class _AddListState extends State<AddList> {
                                 isDone: false,
                                 title: _newTodoController.text,
                                 details: ""));
-                            print(_listOfTodos[0].title);
+                            print(
+                                'Hello todo add ::: ${_listOfTodos[0].title}');
                             _newTodoController.text = "";
                           });
                         },

@@ -1,12 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+
+// import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 import './src/injection_container.dart' as di;
 import 'src/bloc_delegate.dart';
-import 'src/features/todo_manager_features/presentation/bloc/add_list_bloc/add_list_bloc.dart' as addListBloc;
-import 'src/features/todo_manager_features/presentation/bloc/add_quick_note_bloc/add_quick_note_bloc.dart' as addNoteBloc;
+import 'src/features/todo_manager_features/presentation/bloc/add_list_bloc/add_list_bloc.dart'
+    as addListBloc;
+import 'src/features/todo_manager_features/presentation/bloc/add_quick_note_bloc/add_quick_note_bloc.dart'
+    as addNoteBloc;
 import 'src/features/todo_manager_features/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'src/features/todo_manager_features/presentation/bloc/dashboard_bloc/dashboard_bloc.dart';
 import 'src/features/todo_manager_features/presentation/bloc/login_bloc/login_bloc.dart';
@@ -15,14 +17,13 @@ import 'src/features/todo_manager_features/presentation/pages/Login.dart';
 import 'src/features/todo_manager_features/presentation/pages/add_new_list.dart';
 import 'src/features/todo_manager_features/presentation/pages/add_quick_note.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   BlocSupervisor.delegate = MyBlocDelegate();
   await di.sl.allReady();
-  await FlutterStatusbarcolor.setStatusBarColor(Colors.white.withOpacity(0.90));
-  FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
+  // await FlutterStatusbarcolor.setStatusBarColor(Colors.white.withOpacity(0.90));
+  // FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
   runApp(MyApp());
 }
 
@@ -31,7 +32,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> { 
+class _MyAppState extends State<MyApp> {
   AuthBloc _authBloc;
 
   @override
@@ -48,41 +49,38 @@ class _MyAppState extends State<MyApp> {
   }
 
   @override
-  Widget build(BuildContext context){
-    
+  Widget build(BuildContext context) {
     return BlocProvider.value(
       value: _authBloc,
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Todo App',
-            theme: ThemeData(
-              primaryColor: Color(0xff657AFF),
-              accentColor: Color(0xff4F5578),
-              primarySwatch: Colors.blue,
-            ),
-            home: BlocBuilder(
-              bloc: _authBloc,
-              builder: (BuildContext context, AuthState authState){
-                if(authState is Uninitialised){
-                  return BlocProvider<LoginBloc>(
-                    create: (context){return di.sl<LoginBloc>();},
-                    child: LoginPage()
-                  ); 
-                }
-
-                else if(authState is AuthAuthenticated){
-                  return FutureBuilder(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Todo App',
+        theme: ThemeData(
+          primaryColor: Color(0xff657AFF),
+          accentColor: Color(0xff4F5578),
+          primarySwatch: Colors.blue,
+        ),
+        home: BlocBuilder(
+            bloc: _authBloc,
+            builder: (BuildContext context, AuthState authState) {
+              if (authState is Uninitialised) {
+                return BlocProvider<LoginBloc>(
+                    create: (context) {
+                      return di.sl<LoginBloc>();
+                    },
+                    child: LoginPage());
+              } else if (authState is AuthAuthenticated) {
+                return FutureBuilder(
                     future: di.sl.allReady(),
                     builder: (context, snapshot) {
-                      if(snapshot.hasData){
+                      if (snapshot.hasData) {
                         return BlocProvider<DashboardBloc>(
-                        create: (context){
-                          return di.sl<DashboardBloc>();
-                        },
-                        child: DashboardScreen(),
-                      );
-                      }
-                      else{
+                          create: (context) {
+                            return di.sl<DashboardBloc>();
+                          },
+                          child: DashboardScreen(),
+                        );
+                      } else {
                         return Scaffold(
                           body: Center(
                             child: Container(
@@ -93,38 +91,35 @@ class _MyAppState extends State<MyApp> {
                           ),
                         );
                       }
-                      
-                    }
-                  ); 
-                }
-                else{
-                  return BlocProvider<LoginBloc>(
-                    create: (context){return di.sl<LoginBloc>();},
-                    child: LoginPage()
-                  ); 
-                }
-              }
-            ),
-            routes: {
-              "/dashboard": (context) =>BlocProvider<DashboardBloc>(
-                    create: (context){
-                      return di.sl<DashboardBloc>();
+                    });
+              } else {
+                return BlocProvider<LoginBloc>(
+                    create: (context) {
+                      return di.sl<LoginBloc>();
                     },
-                    child: DashboardScreen(),
-                  ),
-              "/addQuickNote": (context) => BlocProvider<addNoteBloc.AddQuickNoteBloc>(
-                create: (context){return di.sl<addNoteBloc.AddQuickNoteBloc>();},
-                child: AddQuickNote()
+                    child: LoginPage());
+              }
+            }),
+        routes: {
+          "/dashboard": (context) => BlocProvider<DashboardBloc>(
+                create: (context) {
+                  return di.sl<DashboardBloc>();
+                },
+                child: DashboardScreen(),
               ),
-              "/addList": (context) => BlocProvider<addListBloc.AddListBloc>(
-                create: (context){return di.sl<addListBloc.AddListBloc>();},
-                child: AddList()
-              ),
-              
-            },
-          ),
-        
+          "/addQuickNote": (context) =>
+              BlocProvider<addNoteBloc.AddQuickNoteBloc>(
+                  create: (context) {
+                    return di.sl<addNoteBloc.AddQuickNoteBloc>();
+                  },
+                  child: AddQuickNote()),
+          "/addList": (context) => BlocProvider<addListBloc.AddListBloc>(
+              create: (context) {
+                return di.sl<addListBloc.AddListBloc>();
+              },
+              child: AddList()),
+        },
+      ),
     );
   }
 }
-

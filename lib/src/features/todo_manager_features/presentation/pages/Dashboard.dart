@@ -19,13 +19,12 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        resizeToAvoidBottomPadding: false,
+        // resizeToAvoidBottomPadding: false,
         key: _scaffoldKey,
-        
+
         body: Dashboard(
             bloc: BlocProvider.of<DashboardBloc>(context),
             scaffoldKey: _scaffoldKey),
@@ -178,10 +177,8 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void _showBottomSheet(ListEntity list) {
-    
-    
-  _controller =
-        this.widget.scaffoldKey.currentState.showBottomSheet((context) {
+    _controller = this.widget.scaffoldKey.currentState.showBottomSheet(
+        (context) {
       return AnimatedPadding(
         padding: MediaQuery.of(context).viewInsets,
         duration: const Duration(milliseconds: 100),
@@ -195,11 +192,8 @@ class _DashboardState extends State<Dashboard> {
         ),
       );
     },
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(topRight: Radius.circular(50))
-    )
-    );
-    
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(topRight: Radius.circular(50))));
   }
 
   void _closeBottomSheet() {
@@ -218,7 +212,6 @@ class _DashboardState extends State<Dashboard> {
           actions: <Widget>[NoWidget()],
           elevation: 0.0,
           backgroundColor: Colors.transparent,
-          
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
