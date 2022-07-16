@@ -2,8 +2,6 @@
 VERSION = $(shell cat ./VERSION)
 BUILD_NUMBER = $(shell cat ./BUILDNUMBER)
 BUILD_NUMBER_FILE=BUILDNUMBER
-BUILD_NUMBER_LIVE = $(shell cat ./BUILDNUMBER_LIVE)
-BUILD_NUMBER_LIVE_FILE=BUILDNUMBER_LIVE
 
 incrementbuild: 
 	@if ! test -f $(BUILD_NUMBER_FILE); then echo 0 > $(BUILD_NUMBER_FILE); fi
@@ -29,14 +27,14 @@ release-dev:
 		--release-notes-file "changelog.txt" 
 
 release-live-aab:
-	make incrementbuild-live
+	make incrementbuild
 	fvm flutter clean
-	fvm flutter build appbundle --release --build-name=$(VERSION) --build-number=$(BUILD_NUMBER_LIVE)
-	firebase appdistribution:distribute build/app/outputs/bundle/liveRelease/app-live-release.aab  \
+	fvm flutter build appbundle --release --build-name=$(VERSION) --build-number=$(BUILD_NUMBER)
+	firebase appdistribution:distribute build/app/outputs/bundle/liveRelease/app-release.aab  \
 		--app 1:494568612584:android:24db9236ad7b752c1e5f5d  \
 		--groups "dev" \
 		--release-notes-file "changelog.txt" 
 
 test-live-aab:
 	fvm flutter clean
-	fvm flutter build appbundle --release --build-name=$(VERSION) --build-number=$(BUILD_NUMBER_LIVE) --obfuscate --split-debug-info=./mobile_android_live
+	fvm flutter build appbundle --release --build-name=$(VERSION) --build-number=$(BUILD_NUMBER) --obfuscate --split-debug-info=./mobile_android_live
