@@ -35,6 +35,10 @@ release-live-aab:
 		--groups "dev" \
 		--release-notes-file "changelog.txt" 
 
+test-live-apk:
+	fvm flutter clean
+	fvm flutter build apk --release --build-name=$(VERSION) --build-number=$(BUILD_NUMBER) --obfuscate --split-debug-info=./mobile_android_live
+
 test-live-aab:
 	fvm flutter clean
 	fvm flutter build appbundle --release --build-name=$(VERSION) --build-number=$(BUILD_NUMBER) --obfuscate --split-debug-info=./mobile_android_live
