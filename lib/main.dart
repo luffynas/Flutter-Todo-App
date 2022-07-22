@@ -223,7 +223,7 @@ class _MyAppState extends State<MyApp> {
       value: _authBloc,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Todo App',
+        title: 'Nxt App',
         theme: ThemeData(
           primaryColor: Color(0xff657AFF),
           accentColor: Color(0xff4F5578),
