@@ -2,6 +2,11 @@
 
 A todo app built with flutter and firebase
 
+Using SDKMAN & FVM for configure JDK & SDK Flutter
+
+JDK version 8.0.362 (1.8)
+SDK Flutter version 2.10.5
+
 <p float= "left">
   <img src = "screenshots/first.png" width = "250" />
   <img src = "screenshots/second.png" width = "250" />
