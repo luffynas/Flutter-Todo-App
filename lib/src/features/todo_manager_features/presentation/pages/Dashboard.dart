@@ -216,13 +216,19 @@ class _DashboardState extends State<Dashboard> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text(
-              'Hello ${sl<User>().displayName.toString().split(" ")[0]}',
-              style: TextStyle(
+            Expanded(
+              child: Text(
+                'Hello ${sl<User>().displayName.toString().split(" ")[0]}',
+                style: TextStyle(
                   fontSize: 32.0,
                   fontFamily: "Poppins",
                   fontWeight: FontWeight.w200,
-                  color: Theme.of(context).accentColor),
+                  color: Theme.of(context).accentColor,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             SmallButton(
               icon: Icon(
