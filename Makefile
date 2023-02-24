@@ -36,6 +36,7 @@ release-live-aab:
 		--release-notes-file "changelog.txt" 
 
 test-live-apk:
+	make incrementbuild
 	fvm flutter clean
 	fvm flutter build apk --release --build-name=$(VERSION) --build-number=$(BUILD_NUMBER) --obfuscate --split-debug-info=./mobile_android_live
 
